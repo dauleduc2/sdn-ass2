@@ -36,9 +36,11 @@ class playerController {
       })
       .catch(next);
   }
+
   getPlayer(req, res, next) {
     Players.findById(req.params.id)
       .then((player) => {
+        console.log(player);
         res.render("editPlayer", {
           title: "The Player",
           player: player,
@@ -48,6 +50,7 @@ class playerController {
       })
       .catch(next);
   }
+
   create(req, res, next) {
     const player = new Players(req.body);
     player
@@ -55,6 +58,7 @@ class playerController {
       .then(() => res.redirect("/"))
       .catch((error) => {});
   }
+
   update(req, res, next) {
     Players.findByIdAndUpdate(req.params.id, req.body, function (err, result) {
       if (err) {
@@ -64,6 +68,7 @@ class playerController {
       }
     });
   }
+
   delete(req, res, next) {
     Players.findByIdAndRemove(req.params.id, function (err, player) {
       if (err) throw err;
